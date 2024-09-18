@@ -1,0 +1,30 @@
+import numpy as np
+
+
+class Bin:
+    def __init__(self, m_min, m_max):
+        self.m_min = m_min
+        self.m_max = m_max
+        self.m_center = (m_min + m_max) / 2.0
+
+    def mask(self, m1):
+        return (m1 >= self.m_min) & (m1 < self.m_max)
+
+    @property
+    def log_width(self):
+        return np.log(self.m_max) - np.log(self.m_min)
+
+
+class Bins(list):
+    def __init__(self, mbins):
+        self.mbins = mbins
+        for i in range(len(mbins)-1):
+            self.append(Bin(m_min=mbins[i], m_max=mbins[i+1]))
+
+    @property
+    def m_centers(self):
+        return np.array([bin.m_center for bin in self])
+
+    @property
+    def log_widths(self):
+        return np.array([bin.log_width for bin in self])
