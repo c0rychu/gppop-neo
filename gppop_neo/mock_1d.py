@@ -28,3 +28,12 @@ class Bins(list):
     @property
     def log_widths(self):
         return np.array([bin.log_width for bin in self])
+
+
+class Piecewise:
+    def __init__(self, bins, y):
+        self.bins = bins
+        self.y = y
+
+    def __call__(self, x):
+        return np.piecewise(x, [np.logical_and(x >= bin.m_min, x < bin.m_max) for bin in self.bins], self.y)  # noqa: E501
