@@ -5,7 +5,8 @@ class Bin:
     def __init__(self, m_min, m_max):
         self.m_min = m_min
         self.m_max = m_max
-        self.m_center = (m_min + m_max) / 2.0
+        self.m_center = 0.5 * (m_min + m_max)
+        self.log_m_log_center = 0.5 * (np.log(m_min) + np.log(m_max))
 
     def mask(self, m1):
         return (m1 >= self.m_min) & (m1 < self.m_max)
@@ -24,6 +25,10 @@ class Bins(list):
     @property
     def m_centers(self):
         return np.array([bin.m_center for bin in self])
+
+    @property
+    def log_m_log_centers(self):
+        return np.array([bin.log_m_log_center for bin in self])
 
     @property
     def log_widths(self):
