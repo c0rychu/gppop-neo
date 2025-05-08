@@ -8,7 +8,7 @@ class OutputDataProductsFast:
         conditional_distributions_grid()
     provided in gppop.io.output_data_products
 
-    Authour: Yu-Kuang (Cory) Chu
+    Author: Yu-Kuang (Cory) Chu
     """
     def __init__(self, odp, grid_points_per_bin=100):
         self.odp = odp
