@@ -15,6 +15,10 @@ class Bin:
     def log_width(self):
         return np.log(self.m_max) - np.log(self.m_min)
 
+    @property
+    def width(self):
+        return self.m_max - self.m_min
+
 
 class Bins(list):
     def __init__(self, mbins):
@@ -33,6 +37,10 @@ class Bins(list):
     @property
     def log_widths(self):
         return np.array([bin.log_width for bin in self])
+
+    @property
+    def widths(self):
+        return np.array([bin.width for bin in self])
 
 
 class Piecewise:
