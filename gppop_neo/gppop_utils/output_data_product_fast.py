@@ -120,7 +120,9 @@ class OutputDataProductsFast:
         sorting_idx, slices_of_sorting_idx = self._get_sorting_idx_and_slices(idx)
         return np.add.reduceat(matrix[..., sorting_idx], slices_of_sorting_idx, axis=-1)
 
-    def get_marg_dist_log_m1_cond_on_z(self, reshape: bool = False) -> NDArray[np.float_]:
+    def get_marg_dist_log_m1_cond_on_z(
+        self, reshape: bool = False
+    ) -> NDArray[np.float_]:
         """
         Marginalize the rates matrix over m2
 
@@ -148,7 +150,9 @@ class OutputDataProductsFast:
             Rplogm1 = np.reshape(Rplogm1, (-1, self.num_bins_z, self.num_bins_m_1dim))
         return Rplogm1
 
-    def get_marg_dist_log_m2_cond_on_z(self, reshape: bool = False) -> NDArray[np.float_]:
+    def get_marg_dist_log_m2_cond_on_z(
+        self, reshape: bool = False
+    ) -> NDArray[np.float_]:
         """
         Marginalize the rates matrix over m1
 
@@ -256,7 +260,8 @@ class OutputDataProductsFast:
         -------
         Rpm1 : NDArray[np.float_]
             It is most likely to be a 3D array whose shape is
-            (num_mcmc_samples, num_bins_z, num_bins_m1 * (GRID_POINTS_PER_BIN-1))"""
+            (num_mcmc_samples, num_bins_z, num_bins_m1 * (GRID_POINTS_PER_BIN-1))
+        """
         Rplogm1 = self.get_marg_dist_log_m1_cond_on_z(reshape=True)
         Rplogm1 = np.repeat(Rplogm1, self.GRID_POINTS_PER_BIN - 1, axis=-1)
         # FIXME: Can we eliminate the "-1" in self.GRID_POINTS_PER_BIN-1?
